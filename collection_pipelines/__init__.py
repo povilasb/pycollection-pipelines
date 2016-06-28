@@ -17,16 +17,14 @@ class filter(CollectionPipelineProcessor):
     def __init__(self, text):
         self.text = text
 
-    def process(self):
-        line = yield
-        if line != self.text:
-            self.receiver.send(line)
+    def process(self, item):
+        if item != self.text:
+            self.receiver.send(item)
 
 
 class out(CollectionPipelineProcessor):
-    def process(self):
-        line = yield
-        print(line)
+    def process(self, item):
+        print(item)
 
     def source(self, start_source):
         start_source()
@@ -36,8 +34,7 @@ class count(CollectionPipelineProcessor):
     def __init__(self):
         self.val = 0
 
-    def process(self):
-        yield
+    def process(self, item):
         self.val += 1
 
     def on_done(self):
@@ -47,8 +44,7 @@ class count(CollectionPipelineProcessor):
 class unique(CollectionPipelineProcessor):
     seen = []
 
-    def process(self):
-        item = yield
+    def process(self, item):
         if item not in self.seen:
             self.receiver.send(item)
             self.seen.append(item)

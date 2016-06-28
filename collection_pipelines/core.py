@@ -15,7 +15,7 @@ class CollectionPipelineProcessor:
     start_source = None
     receiver = None
 
-    def process(self):
+    def process(self, item):
         raise NotImplementedError
 
     def on_done(self):
@@ -29,7 +29,8 @@ class CollectionPipelineProcessor:
     def make_generator(self):
         while True:
             try:
-                yield from self.process()
+                item = yield
+                self.process(item)
             except GeneratorExit:
                 self.on_done()
                 break
