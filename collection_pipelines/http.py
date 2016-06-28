@@ -4,7 +4,11 @@ from collection_pipelines.core import CollectionPipelineProcessor
 
 
 def http_get(url):
-    return urllib.request.urlopen(url).read()
+    """
+    Returns:
+        str: response body.
+    """
+    return urllib.request.urlopen(url).read().decode('utf-8')
 
 
 class http(CollectionPipelineProcessor):
