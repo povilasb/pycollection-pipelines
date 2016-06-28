@@ -1,4 +1,5 @@
 from collection_pipelines.http import *
+from collection_pipelines.json import *
 
 
 class cat(CollectionPipelineProcessor):
