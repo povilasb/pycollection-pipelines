@@ -1,8 +1,7 @@
 from hamcrest import assert_that, is_
 from mock import MagicMock, patch
 
-from collection_pipelines import http
-import collection_pipelines
+from collection_pipelines.http import http
 
 
 def describe_http():
@@ -23,11 +22,9 @@ def describe_http():
             assert_that(proc.start_source, is_(proc.make_generator))
 
     def describe_make_generator():
-        @patch('collection_pipelines.http_get')
-        def it_sends_http_response_to_pipe_output(http_get):
-            http_get.return_value = 'response'
-
+        def it_sends_http_response_to_pipe_output():
             proc = http('example.com')
+            proc._get = MagicMock(return_value='response')
             proc.receiver = MagicMock()
 
             proc.make_generator()

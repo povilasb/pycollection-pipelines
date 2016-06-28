@@ -1,4 +1,4 @@
-from collection_pipelines.http import *
+from collection_pipelines.http import http
 from collection_pipelines.json import *
 
 
