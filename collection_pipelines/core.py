@@ -25,6 +25,18 @@ class CollectionPipelineProcessor:
     def source(self, start_source):
         self.start_source = start_source
 
+    def return_value(self):
+        """Processor return value when used with __or__ operator.
+
+        Returns:
+            CollectionPipelineProcessor: when processor is to be chained
+                with other processors.
+            any: any other value when processor is used as an output and is
+                meant to return value. In this way we can assign
+                the output result to python variable.
+        """
+        return self
+
     @coroutine
     def make_generator(self):
         while True:
@@ -36,6 +48,14 @@ class CollectionPipelineProcessor:
                 break
 
     def __or__(self, other):
+        """Overwrites the '|' operator.
+
+        Args:
+            other (CollectionPipelineProcessor)
+
+        Returns:
+            whatever other.return_value() returns.
+        """
         self.sink = other
 
         def exec():
@@ -43,7 +63,7 @@ class CollectionPipelineProcessor:
             self.start_source()
         other.source(exec)
 
-        return other
+        return other.return_value()
 
 
 class CollectionPipelineOutput(CollectionPipelineProcessor):
