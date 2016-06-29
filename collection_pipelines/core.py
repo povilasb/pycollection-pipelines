@@ -44,3 +44,13 @@ class CollectionPipelineProcessor:
         other.source(exec)
 
         return other
+
+
+class CollectionPipelineOutput(CollectionPipelineProcessor):
+    """Pipeline processor that ends the chain and starts outputing stream.
+
+    Output processor immediately starts consuming from the source.
+    Thus triggering the whole pipeline start.
+    """
+    def source(self, start_source):
+        start_source()
