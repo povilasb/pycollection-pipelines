@@ -23,12 +23,9 @@ class filter(CollectionPipelineProcessor):
             self.receiver.send(item)
 
 
-class out(CollectionPipelineProcessor):
+class out(CollectionPipelineOutput):
     def process(self, item):
         print(item)
-
-    def source(self, start_source):
-        start_source()
 
 
 class count(CollectionPipelineProcessor):
