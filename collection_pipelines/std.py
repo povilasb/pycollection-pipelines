@@ -1,5 +1,7 @@
 """Standard pipeline processors."""
 
+import collections
+
 from collection_pipelines.core import CollectionPipelineOutput, \
     CollectionPipelineProcessor
 
@@ -37,3 +39,22 @@ class head(CollectionPipelineProcessor):
         if self.processed < self.count:
             self.receiver.send(item)
             self.processed += 1
+
+
+class tail(CollectionPipelineProcessor):
+    """Sends only N last items to output.
+
+    It holds only a fixed number of items and when source processor
+    sends a done signal, it sends those last N items to output.
+    """
+
+    def __init__(self, count):
+        self.count = count
+        self.processed = collections.deque(maxlen=count)
+
+    def process(self, item):
+        self.processed.append(item)
+
+    def on_done(self):
+        for item in self.processed:
+            self.receiver.send(item)
