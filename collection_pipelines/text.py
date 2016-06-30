@@ -18,3 +18,11 @@ class echo(CollectionPipelineProcessor):
     def make_generator(self):
         self.receiver.send(self.text)
         self.receiver.close()
+
+
+class words(CollectionPipelineProcessor):
+    """Splits text into words."""
+
+    def process(self, item):
+        for word in item.split():
+            self.receiver.send(word.strip(',.;:?!'))
