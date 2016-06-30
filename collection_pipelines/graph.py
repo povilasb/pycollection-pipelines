@@ -2,7 +2,10 @@ import matplotlib
 matplotlib.use('Qt4Agg')
 import matplotlib.pyplot as plt
 
+from wordcloud import WordCloud
+
 from collection_pipelines.core import CollectionPipelineOutput
+
 
 class GraphPipelineOutput(CollectionPipelineOutput):
     def __init__(self):
@@ -31,4 +34,19 @@ class bar(GraphPipelineOutput):
         ax.bar(range(len(self.x)), self.y, align='center')
         plt.yticks(range(len(self.y) + 1))
         plt.xticks(range(len(self.x) + 1), self.x, rotation='vertical')
+        plt.show()
+
+
+class wordcloud(CollectionPipelineOutput):
+    """Draws wordcloud from the words in the pipeline."""
+    def __init__(self):
+        self.text = ''
+
+    def process(self, item):
+        self.text += item
+
+    def on_done(self):
+        wordcloud = WordCloud().generate(self.text)
+        plt.imshow(wordcloud)
+        plt.axis('off')
         plt.show()
