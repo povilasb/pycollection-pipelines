@@ -58,3 +58,22 @@ class tail(CollectionPipelineProcessor):
     def on_done(self):
         for item in self.processed:
             self.receiver.send(item)
+
+
+class freq(CollectionPipelineProcessor):
+    """Calculates how much each item appears on the pipeline."""
+
+    def __init__(self):
+        self.processed = {}
+        self.order = []
+
+    def process(self, item):
+        if item in self.processed:
+            self.processed[item] += 1
+        else:
+            self.order.append(item)
+            self.processed[item] = 1
+
+    def on_done(self):
+        for item in self.order:
+            self.receiver.send((item, self.processed[item]))
