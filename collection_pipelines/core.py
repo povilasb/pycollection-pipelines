@@ -74,3 +74,6 @@ class CollectionPipelineOutput(CollectionPipelineProcessor):
     """
     def source(self, start_source):
         start_source()
+
+    def return_value(self):
+        return None
