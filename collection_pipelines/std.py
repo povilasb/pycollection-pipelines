@@ -1,6 +1,7 @@
 """Standard pipeline processors."""
 
-from collection_pipelines.core import CollectionPipelineOutput
+from collection_pipelines.core import CollectionPipelineOutput, \
+    CollectionPipelineProcessor
 
 
 class value(CollectionPipelineOutput):
@@ -23,3 +24,16 @@ class value(CollectionPipelineOutput):
             return self.retval[0]
 
         return self.retval
+
+
+class head(CollectionPipelineProcessor):
+    """Processor that passes only the first N items through the pipeline."""
+
+    def __init__(self, count):
+        self.count = count
+        self.processed = 0
+
+    def process(self, item):
+        if self.processed < self.count:
+            self.receiver.send(item)
+            self.processed += 1
