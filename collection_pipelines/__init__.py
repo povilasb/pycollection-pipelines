@@ -1,6 +1,7 @@
 from collection_pipelines.http import http
 from collection_pipelines.json import *
 from collection_pipelines.text import *
+from collection_pipelines.std import *
 
 
 class cat(CollectionPipelineProcessor):
