@@ -10,6 +10,7 @@ class http(CollectionPipelineProcessor):
 
     def make_generator(self):
         self.receiver.send(self._get(self.url))
+        self.receiver.close()
 
     def _set_url(self, url):
         if not url.startswith('http://'):
