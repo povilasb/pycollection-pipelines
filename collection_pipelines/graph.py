@@ -43,7 +43,7 @@ class wordcloud(CollectionPipelineOutput):
         self.text = ''
 
     def process(self, item):
-        self.text += item
+        self.text += item + ' '
 
     def on_done(self):
         wordcloud = WordCloud().generate(self.text)
