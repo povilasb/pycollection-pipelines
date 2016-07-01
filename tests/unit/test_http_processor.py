@@ -19,14 +19,14 @@ def describe_http():
         def it_sets_data_source_callback():
             proc = http('dummy.url')
 
-            assert_that(proc.start_source, is_(proc.make_generator))
+            assert_that(proc.start_source, is_(proc.on_begin))
 
-    def describe_make_generator():
+    def describe_on_begin():
         def it_sends_http_response_to_pipe_output():
             proc = http('example.com')
             proc._get = MagicMock(return_value='response')
             proc.receiver = MagicMock()
 
-            proc.make_generator()
+            proc.on_begin()
 
             proc.receiver.send.assert_called_with('response')

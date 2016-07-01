@@ -17,7 +17,7 @@ class echo(CollectionPipelineSource):
 
         self.items = items
 
-    def make_generator(self):
+    def on_begin(self):
         self._send_items()
         self.receiver.close()
 
@@ -40,7 +40,7 @@ class cat(CollectionPipelineSource):
 
         self.fname = fname
 
-    def make_generator(self):
+    def on_begin(self):
         with open(self.fname, 'r') as f:
             for line in f:
                 self.receiver.send(line.rstrip('\n'))

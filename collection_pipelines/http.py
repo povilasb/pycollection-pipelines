@@ -9,7 +9,7 @@ class http(CollectionPipelineSource):
 
         self._set_url(url)
 
-    def make_generator(self):
+    def on_begin(self):
         self.receiver.send(self._get(self.url))
         self.receiver.close()
 

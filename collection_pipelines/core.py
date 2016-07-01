@@ -82,8 +82,8 @@ class CollectionPipelineOutput(CollectionPipelineProcessor):
 class CollectionPipelineSource(CollectionPipelineProcessor):
     """Pipeline data source processor."""
     def __init__(self):
-        self.source(self.make_generator)
+        self.source(self.on_begin)
 
-    def make_generator(self):
+    def on_begin(self):
         """Constructs the items generator."""
         raise NotImplementedError
