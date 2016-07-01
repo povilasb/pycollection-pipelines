@@ -12,13 +12,25 @@ class split(CollectionPipelineProcessor):
 
 
 class echo(CollectionPipelineProcessor):
-    def __init__(self, text):
-        self.text = text
+    def __init__(self, items):
+        self.items = items
         self.source(self.make_generator)
 
     def make_generator(self):
-        self.receiver.send(self.text)
+        self._send_items()
         self.receiver.close()
+
+    def _send_items(self):
+        """Sends items to pipeline.
+
+        If items is an array, sends them one by one.
+        Otherwise simply sends one item.
+        """
+        if isinstance(self.items, list):
+            for item in self.items:
+                self.receiver.send(item)
+        else:
+            self.receiver.send(self.items)
 
 
 class cat(CollectionPipelineProcessor):
