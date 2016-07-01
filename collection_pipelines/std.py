@@ -75,3 +75,32 @@ class freq(CollectionPipelineProcessor):
     def on_done(self):
         for item, count in self.processed.items():
             self.receiver.send((item, count))
+
+
+class count(CollectionPipelineProcessor):
+    def __init__(self):
+        self.val = 0
+
+    def process(self, item):
+        self.val += 1
+
+    def on_done(self):
+        self.receiver.send(self.val)
+
+
+class filter(CollectionPipelineProcessor):
+    def __init__(self, text):
+        self.text = text
+
+    def process(self, item):
+        if item != self.text:
+            self.receiver.send(item)
+
+
+class unique(CollectionPipelineProcessor):
+    seen = []
+
+    def process(self, item):
+        if item not in self.seen:
+            self.receiver.send(item)
+            self.seen.append(item)
