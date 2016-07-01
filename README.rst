@@ -11,6 +11,8 @@ pattern implementation in python.
 
 .. contents:: :local:
 
+.. image:: basic_samples.gif
+
 .. note::
 
     Library only works on Python 3.  There are no plans to support previous
