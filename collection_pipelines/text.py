@@ -1,5 +1,5 @@
 from collection_pipelines.core import CollectionPipelineProcessor, \
-    CollectionPipelineOutput
+    CollectionPipelineOutput, CollectionPipelineSource
 
 
 class split(CollectionPipelineProcessor):
@@ -11,10 +11,11 @@ class split(CollectionPipelineProcessor):
             self.receiver.send(part)
 
 
-class echo(CollectionPipelineProcessor):
+class echo(CollectionPipelineSource):
     def __init__(self, items):
+        super().__init__()
+
         self.items = items
-        self.source(self.make_generator)
 
     def make_generator(self):
         self._send_items()
@@ -33,10 +34,11 @@ class echo(CollectionPipelineProcessor):
             self.receiver.send(self.items)
 
 
-class cat(CollectionPipelineProcessor):
+class cat(CollectionPipelineSource):
     def __init__(self, fname):
+        super().__init__()
+
         self.fname = fname
-        self.source(self.make_generator)
 
     def make_generator(self):
         with open(self.fname, 'r') as f:

@@ -1,12 +1,13 @@
 import urllib.request
 
-from collection_pipelines.core import CollectionPipelineProcessor
+from collection_pipelines.core import CollectionPipelineSource
 
 
-class http(CollectionPipelineProcessor):
+class http(CollectionPipelineSource):
     def __init__(self, url):
+        super().__init__()
+
         self._set_url(url)
-        self.source(self.make_generator)
 
     def make_generator(self):
         self.receiver.send(self._get(self.url))
