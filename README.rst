@@ -217,3 +217,33 @@ all of them, the class would look like
         def on_done(self):
             for item in self.items:
                 print(item)
+
+More Samples
+============
+
+Bar Chart
+---------
+
+.. code-block:: python
+
+    echo([('apples', 2), ('bananas', 5), ('oranges', 3)]) | bar()
+
+.. image:: bar.png
+
+Line Chart
+----------
+
+.. code-block:: python
+
+    echo([(1, 10), (2, 7), (3, 5), (4, 5), (5, 8)]) | line()
+
+.. image:: line.png
+
+Word Cloud
+----------
+
+.. code-block:: python
+
+    cat('README.rst') | wordcloud()
+
+.. image:: wordcloud.png
