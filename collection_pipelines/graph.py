@@ -39,10 +39,10 @@ class bar(GraphPipelineOutput):
 
 class wordcloud(CollectionPipelineOutput):
     """Draws wordcloud from the words in the pipeline."""
-    def __init__(self):
+    def __init__(self) -> None:
         self.text = ''
 
-    def process(self, item):
+    def process(self, item: str):
         self.text += item + ' '
 
     def on_done(self):

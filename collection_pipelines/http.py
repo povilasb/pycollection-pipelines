@@ -4,7 +4,7 @@ from collection_pipelines.core import CollectionPipelineSource
 
 
 class http(CollectionPipelineSource):
-    def __init__(self, url):
+    def __init__(self, url: str) -> None:
         super().__init__()
 
         self._set_url(url)
@@ -13,13 +13,13 @@ class http(CollectionPipelineSource):
         self.receiver.send(self._get(self.url))
         self.receiver.close()
 
-    def _set_url(self, url):
+    def _set_url(self, url: str):
         if not url.startswith('http://'):
             url = 'http://' + url
 
         self.url = url
 
-    def _get(self, url):
+    def _get(self, url: str):
         """
         Returns:
             str: response body.

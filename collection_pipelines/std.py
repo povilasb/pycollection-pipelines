@@ -31,7 +31,7 @@ class value(CollectionPipelineOutput):
 class head(CollectionPipelineProcessor):
     """Processor that passes only the first N items through the pipeline."""
 
-    def __init__(self, count):
+    def __init__(self, count: int) -> None:
         self.count = count
         self.processed = 0
 
@@ -48,7 +48,7 @@ class tail(CollectionPipelineProcessor):
     sends a done signal, it sends those last N items to output.
     """
 
-    def __init__(self, count):
+    def __init__(self, count: int) -> None:
         self.count = count
         self.processed = collections.deque(maxlen=count)
 
@@ -78,7 +78,7 @@ class freq(CollectionPipelineProcessor):
 
 
 class count(CollectionPipelineProcessor):
-    def __init__(self):
+    def __init__(self) -> None:
         self.val = 0
 
     def process(self, item):
@@ -89,7 +89,7 @@ class count(CollectionPipelineProcessor):
 
 
 class filter(CollectionPipelineProcessor):
-    def __init__(self, text):
+    def __init__(self, text) -> None:
         self.text = text
 
     def process(self, item):
@@ -98,7 +98,8 @@ class filter(CollectionPipelineProcessor):
 
 
 class unique(CollectionPipelineProcessor):
-    seen = []
+    def __init__(self):
+        self.seen = []
 
     def process(self, item):
         if item not in self.seen:

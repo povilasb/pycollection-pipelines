@@ -5,16 +5,16 @@ from collection_pipelines.core import CollectionPipelineProcessor, \
 
 
 class split(CollectionPipelineProcessor):
-    def __init__(self, delimiter):
+    def __init__(self, delimiter: str) -> None:
         self.delimiter = delimiter
 
-    def process(self, item):
+    def process(self, item: str):
         for part in item.split(self.delimiter):
             self.receiver.send(part)
 
 
 class echo(CollectionPipelineSource):
-    def __init__(self, items):
+    def __init__(self, items) -> None:
         super().__init__()
 
         self.items = items
@@ -37,7 +37,7 @@ class echo(CollectionPipelineSource):
 
 
 class cat(CollectionPipelineSource):
-    def __init__(self, fname):
+    def __init__(self, fname: str) -> None:
         super().__init__()
 
         self.fname = fname
@@ -52,7 +52,7 @@ class cat(CollectionPipelineSource):
 class words(CollectionPipelineProcessor):
     """Splits text into words."""
 
-    def process(self, item):
+    def process(self, item: str):
         for word in re.split('[ \t,.;:?!]', item):
             if word:
                 self.receiver.send(word)

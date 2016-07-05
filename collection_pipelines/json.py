@@ -5,20 +5,19 @@ from collection_pipelines.core import CollectionPipelineProcessor
 
 
 class json(CollectionPipelineProcessor):
-    def __init__(self, path):
+    def __init__(self, path: str) -> None:
         self.path = path
 
-    def process(self, item):
+    def process(self, item: str):
         data = json_loads(item)
         self.receiver.send(dict_item(data, self.path))
 
 
-def dict_item(dictionary, path):
+def dict_item(dictionary: dict, path: str):
     """Extracts dictionary item by the given path.
 
     Args:
-        dictionary (dict)
-        path (str): path to dictionary item. May point to nested elements.
+        path: path to dictionary item. May point to nested elements.
             In such case dot is used to notate children nodes.
             E.g. "name.first".
 

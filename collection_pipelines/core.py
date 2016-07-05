@@ -1,7 +1,8 @@
 import functools
+from typing import Callable
 
 
-def coroutine(fn):
+def coroutine(fn: Callable):
     def wrapper(*args, **kwargs):
         generator = fn(*args, **kwargs)
         next(generator)
@@ -72,10 +73,10 @@ class CollectionPipelineOutput(CollectionPipelineProcessor):
     Output processor immediately starts consuming from the source.
     Thus triggering the whole pipeline start.
     """
-    def source(self, start_source):
+    def source(self, start_source: CollectionPipelineProcessor):
         start_source()
 
-    def return_value(self):
+    def return_value(self) -> None:
         return None
 
 
