@@ -13,6 +13,8 @@ test: $(virtualenv_dir)
 	$(coverage) report -m
 .PHONY: test
 
-$(virtualenv_dir): requirements/dev.txt
+$(virtualenv_dir): requirements/dev.txt requirements/prod.txt
 	virtualenv $@ --python=$(python)
-	$(pip) install -r $^
+	for r in $^ ; do \
+		$(pip) install -r $$r ; \
+	done
