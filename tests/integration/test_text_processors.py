@@ -24,10 +24,11 @@ def describe_split_processor():
         assert_that(nums, is_(['1', '2', '3', '4']))
 
 def describe_words_processor():
-    def if_splits_text_into_words():
-        word_list = echo('word1 word2 word3') | words() | value()
+    def describe_when_words_separated_by_spaces():
+        def it_splits_text_into_words():
+            word_list = echo('word1 word2 word3') | words() | value()
 
-        assert_that(word_list, is_(['word1', 'word2', 'word3']))
+            assert_that(word_list, is_(['word1', 'word2', 'word3']))
 
     def it_ommits_punctuation_symbols():
         word_list = echo('word1, word2, word3.') | words() | value()
