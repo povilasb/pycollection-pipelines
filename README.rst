@@ -2,6 +2,8 @@
 About
 =====
 
+.. image:: https://travis-ci.org/povilasb/pycollection-pipelines.svg?branch=master
+
 Experimental `collection pipeline <http://martinfowler.com/articles/collection-pipeline/>`_
 pattern implementation in python.
 
