@@ -1,3 +1,5 @@
+import re
+
 from collection_pipelines.core import CollectionPipelineProcessor, \
     CollectionPipelineOutput, CollectionPipelineSource
 
@@ -51,8 +53,9 @@ class words(CollectionPipelineProcessor):
     """Splits text into words."""
 
     def process(self, item):
-        for word in item.split():
-            self.receiver.send(word.strip(',.;:?!'))
+        for word in re.split('[ \t,.;:?!]', item):
+            if word:
+                self.receiver.send(word)
 
 
 class out(CollectionPipelineOutput):

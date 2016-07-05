@@ -30,6 +30,18 @@ def describe_words_processor():
 
             assert_that(word_list, is_(['word1', 'word2', 'word3']))
 
+    def describe_when_words_are_separated_by_puctuation_marks():
+        def it_splits_text_into_words():
+            word_list = echo('word1.word2.word3') | words() | value()
+
+            assert_that(word_list, is_(['word1', 'word2', 'word3']))
+
+    def describe_when_words_are_separated_by_tabs():
+        def it_splits_text_into_words():
+            word_list = echo('word1\tword2\tword3') | words() | value()
+
+            assert_that(word_list, is_(['word1', 'word2', 'word3']))
+
     def it_ommits_punctuation_symbols():
         word_list = echo('word1, word2, word3.') | words() | value()
 
