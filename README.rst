@@ -109,7 +109,7 @@ Output Processors
 
 **value()**
   Returns the collected items rather than outputting them somewhere.
-  Usefull when you want to store resulting pipeline items to variable.
+  Useful when you want to store resulting pipeline items to variable.
   If more than one item passes the pipeline, the array of those items is
   returned.
 
