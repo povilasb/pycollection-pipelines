@@ -115,13 +115,13 @@ Output Processors
 
 **line()**
   Collects all items and draws a line chart.
-  Items must by tuples where first item is X axis value, and second item
+  Items must be tuples where first item is X axis value, and second item
   is Y axis value.
   Chart is plotted using matplotlib.
 
 **bar()**
   Collects all items and draws a bar chart.
-  Items must by tuples where first item is X axis value, and second item
+  Items must be tuples where first item is X axis value, and second item
   is Y axis value.
   Chart is plotted using matplotlib.
 
