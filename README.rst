@@ -174,7 +174,7 @@ that extends *CollectionPipelineProcessor* class.
 All the work is done in *process()* method.
 This methods receives an item passing the pipeline.
 
-You might either ignore, transform or simly pass forward the items.
+You might either ignore, transform or simply pass forward the items.
 To send item further to the pipe use *self.receiver.send(item)*.
 
 E.g. if you wanted to multiply all items, you could implement the method
