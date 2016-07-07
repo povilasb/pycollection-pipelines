@@ -6,5 +6,5 @@ from collection_pipelines.std import value, head, tail, freq, count, filter, \
 
 try:
     from collection_pipelines.graph import line, bar, wordcloud
-except:
+except ImportError:
     pass
