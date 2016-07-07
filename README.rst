@@ -3,6 +3,9 @@ About
 =====
 
 .. image:: https://travis-ci.org/povilasb/pycollection-pipelines.svg?branch=master
+.. image:: https://www.quantifiedcode.com/api/v1/project/7913d23626d3406fa334a88e962d8529/badge.svg
+  :target: https://www.quantifiedcode.com/app/project/7913d23626d3406fa334a88e962d8529
+  :alt: Code issues
 
 Experimental `collection pipeline <http://martinfowler.com/articles/collection-pipeline/>`_
 pattern implementation in python.
