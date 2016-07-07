@@ -23,6 +23,13 @@ pattern implementation in python.
     Library only works on Python 3.  There are no plans to support previous
     python versions.
 
+Installation
+============
+
+::
+
+    $ pip install collection-pipelines
+
 Usage
 =====
 
