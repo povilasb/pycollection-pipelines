@@ -61,3 +61,20 @@ class words(CollectionPipelineProcessor):
 class out(CollectionPipelineOutput):
     def process(self, item):
         print(item)
+
+
+class grep(CollectionPipelineProcessor):
+    """Filter lines that match regular expression."""
+
+    def __init__(self, pattern: str) -> None:
+        self.pattern = pattern
+        self.invert = False
+
+    def process(self, item: str) -> None:
+        if (re.search(self.pattern, item) is not None) ^ self.invert:
+            self.receiver.send(item)
+
+    def inv(self):
+        """Inverts the regular expression search."""
+        self.invert = True
+        return self

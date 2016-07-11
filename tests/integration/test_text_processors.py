@@ -1,6 +1,6 @@
 from hamcrest import assert_that, is_
 
-from collection_pipelines.text import echo, split, words
+from collection_pipelines.text import echo, split, words, grep
 from collection_pipelines.std import value, filter
 
 
@@ -46,3 +46,15 @@ def describe_words_processor():
         word_list = echo('word1, word2, word3.') | words() | value()
 
         assert_that(word_list, is_(['word1', 'word2', 'word3']))
+
+def describe_grep_processor():
+    def it_filters_items_by_python_regular_expressions():
+        items = echo(['item1', '2item', 'item3']) | grep('^item*') | value()
+
+        assert_that(items, is_(['item1', 'item3']))
+
+    def describe_when_search_is_inverted():
+        def it_filters_items_that_do_not_match_the_specified_regular_expression():
+            items = echo(['item1', '2item', 'item3']) | grep('^item*').inv() | value()
+
+            assert_that(items, is_('2item'))
