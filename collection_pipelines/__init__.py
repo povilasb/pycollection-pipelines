@@ -3,6 +3,7 @@ from collection_pipelines.json import json
 from collection_pipelines.text import split, echo, cat, words, out, grep
 from collection_pipelines.std import value, head, tail, freq, count, filter, \
     unique
+from collection_pipelines.pysay import pysay
 
 try:
     from collection_pipelines.graph import line, bar, wordcloud
